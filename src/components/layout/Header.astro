@@ -1,0 +1,61 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import type { MenuItem } from "src/types";
+
+const { lang } = Astro.props as { lang: "es" | "en" };
+
+const menuItems: Record<"es" | "en", MenuItem[]> = {
+  es: [
+    { text: "Nosotros", path: "about" },
+    { text: "Eventos", path: "events" },
+    { text: "Noticias", path: "News" },
+    { text: "Agenda un artista", path: "calendar" },
+  ],
+  en: [
+    { text: "About us", path: "about" },
+    { text: "Events", path: "events" },
+    { text: "News", path: "News" },
+    { text: "Calendar", path: "calendar" },
+  ],
+};
+const items = menuItems[lang];
+---
+
+<header class="bg-white text-black dark:bg-black dark:text-white">
+  <div class="py-6 flex justify-between items-center max-w-7xl mx-auto">
+    <a href={getRelativeLocaleUrl(lang, "/")}>
+      <img src="/logo.png" alt="SMD" class="w-auto h-[50px]" />
+    </a>
+    <nav>
+      <div class="block md:hidden">
+        <button class="text-white" id="menuButton"> &#9776; </button>
+      </div>
+      <ul class="hidden md:flex space-x-6">
+        {
+          items.map((item) => (
+            <li>
+              <a href={getRelativeLocaleUrl(lang, item.path)} class="">
+                {item.text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="md:hidden" id="mobileMenu" style="display: none;">
+      <ul class="flex flex-col space-y-4">
+        {
+          items.map((item) => (
+            <li>
+              <a href="#" class="">
+                {item.text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</header>
+
+<script></script>

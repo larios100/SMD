@@ -1,0 +1,109 @@
+---
+import Facebook from "@components/icons/Facebook.astro";
+import Instagram from "@components/icons/Instagram.astro";
+import Threads from "@components/icons/Threads.astro";
+import Tiktok from "@components/icons/Tiktok.astro";
+import Youtube from "@components/icons/Youtube.astro";
+import { artistList } from "src/lib/data/data";
+import type { ArtistItem } from "src/types";
+
+const { lang } = Astro.props as { lang: "es" | "en" };
+const items = artistList;
+function chunkArray(arr: ArtistItem[], chunkSize: number) {
+  const result = [];
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    result.push(arr.slice(i, i + chunkSize));
+  }
+  return result;
+}
+let groups5 = chunkArray(items, 5);
+let groups2 = chunkArray(items, 2);
+---
+
+<section class="text-center my-10">
+  <h1 class="text-5xl my-10">Representante de artistas</h1>
+  {
+    groups5.map((group) => (
+      <div class="flex flex-wrap min-h-[300px] w-full max-md:hidden">
+        {group.map((item) => (
+          <div class="md:w-1/5 w-1/2 artist-item">
+            <div
+              class={`relative bg-${item.slug} group bg-top bg-no-repeat bg-cover pt-[350px] pb-[50px]`}
+            >
+              <div class="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 hover:bg-opacity-0" />
+              <div class="relative z-10 p-4 text-white">
+                <h2 class="text-2xl">{item.name}</h2>
+                <div class="flex flex-row w-1/2 mx-auto justify-between mt-2">
+                  <Instagram />
+                  <Threads />
+                  <Youtube />
+                  <Facebook />
+                  <Tiktok />
+                </div>
+                <div class="text-center mt-4">
+                  <a
+                    href="#"
+                    class="border border-white rounded-md w-auto px-3 py-2 group-hover:bg-gray-800 group-hover:border-gray-800"
+                  >
+                    Learn more
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    ))
+  }
+  {
+    groups2.map((group) => (
+      <div class="flex flex-wrap min-h-[300px] w-full lg:hidden">
+        {group.map((item) => (
+          <div class="md:w-1/5 w-1/2 artist-item">
+            <div
+              class={`relative bg-${item.slug} group bg-top bg-no-repeat bg-cover pt-[350px] pb-[50px]`}
+            >
+              <div class="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 hover:bg-opacity-0" />
+              <div class="relative z-10 p-4 text-white">
+                <h2 class="text-2xl">{item.name}</h2>
+                <div class="flex flex-row w-1/2 mx-auto justify-between mt-2">
+                  <Instagram />
+                  <Threads />
+                  <Youtube />
+                  <Facebook />
+                  <Tiktok />
+                </div>
+                <div class="text-center mt-4">
+                  <a
+                    href="#"
+                    class="border border-white rounded-md w-auto px-3 py-2 group-hover:bg-gray-800 group-hover:border-gray-800"
+                  >
+                    Learn more
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    ))
+  }
+</section>
+<style>
+  .artist-item:hover {
+    flex: 4;
+    transition: all 0.8s ease;
+    svg {
+      fill: white;
+    }
+  }
+  .artist-item {
+    flex: 2;
+    transition: all 0.8s ease;
+    svg {
+      fill: #9c9c9c;
+      width: 1em;
+      height: 1em;
+    }
+  }
+</style>
