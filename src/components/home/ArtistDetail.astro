@@ -1,0 +1,76 @@
+---
+import Facebook from "@components/icons/Facebook.astro";
+import Instagram from "@components/icons/Instagram.astro";
+import Threads from "@components/icons/Threads.astro";
+import Tiktok from "@components/icons/Tiktok.astro";
+import Youtube from "@components/icons/Youtube.astro";
+
+const { lang, entry } = Astro.props;
+const { slug } = entry;
+const { Content } = await entry.render();
+const { name, img } = entry.data;
+const [langt, ...slugArr] = entry.slug.split("/");
+const slugName = slugArr.join("/");
+console.log(slugName);
+---
+
+<section class="max-w-7xl mx-auto max-md:px-3">
+  <div class="flex max-md:flex-col gap-12">
+    <aside class="flex flex-col items-center gap-4 text-left max-md:w-full">
+      <img
+        transition:name={`img-${slugName}`}
+        class="rounded w-100 h-auto"
+        src={`/${img}`}
+        alt={name}
+      />
+    </aside>
+    <main class="max-w-3xl">
+      <h1 transition:name={`title-${slugName}`} class="text-4xl font-bold mb-4">
+        {name}
+      </h1>
+      <div>
+        <div
+          class="flex flex-row max-md:w-3/4 w-1/2 justify-between mt-2 icons"
+        >
+          <Instagram />
+          <Threads />
+          <Youtube />
+          <Facebook />
+          <Tiktok />
+        </div>
+      </div>
+      <div class="prose prose-invert mt-4 text-2xl text-gray-400">
+        <Content />
+      </div>
+    </main>
+  </div>
+</section>
+<section class="text-center max-w-7xl mx-auto mt-28 max-md:px-3">
+  <div class="flex gap-12 max-md:flex-col">
+    <div class="md:w-[60%]">
+      <h5 class="text-5xl font-thin mb-4">Last Video</h5>
+      <iframe
+        src="https://www.youtube.com/embed/em1Ndp93vNQ?controls=1&rel=0&playsinline=0&modestbranding=0&autoplay=0&enablejsapi=1&origin=https%3A%2F%2Fwalterkolm.com&widgetid=1"
+        frameborder="0"
+        width="100%"
+        height="360"></iframe>
+    </div>
+    <div class="md:w-[40%]">
+      <h5 class="text-5xl font-thin mb-4">Enjoy the Playlist</h5>
+      <iframe
+        src="https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO0N7ckw?utm_source=generator"
+        frameborder="0"
+        width="100%"
+        height="400"></iframe>
+    </div>
+  </div>
+</section>
+<style>
+  .icons {
+    svg {
+      fill: #9c9c9c;
+      width: 3em;
+      height: 3em;
+    }
+  }
+</style>

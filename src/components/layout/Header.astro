@@ -1,30 +1,25 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
 import type { MenuItem } from "src/types";
+import { useTranslations } from "@i18n/utils";
 
 const { lang } = Astro.props as { lang: "es" | "en" };
 
-const menuItems: Record<"es" | "en", MenuItem[]> = {
-  es: [
-    { text: "Nosotros", path: "about" },
-    { text: "Eventos", path: "events" },
-    { text: "Noticias", path: "News" },
-    { text: "Agenda un artista", path: "calendar" },
-  ],
-  en: [
-    { text: "About us", path: "about" },
-    { text: "Events", path: "events" },
-    { text: "News", path: "News" },
-    { text: "Calendar", path: "calendar" },
-  ],
-};
-const items = menuItems[lang];
+const menuItems: MenuItem[] = [
+  { text: "nav.about", path: "about" },
+  { text: "nav.events", path: "events" },
+  { text: "nav.news", path: "News" },
+  { text: "nav.book", path: "calendar" },
+];
+const t = useTranslations(lang);
 ---
 
-<header class="bg-white text-black dark:bg-black dark:text-white">
-  <div class="py-6 flex justify-between items-center max-w-7xl mx-auto">
+<header class="text-indigo-600 header-animate z-50">
+  <div
+    class="py-4 flex justify-between items-center max-w-7xl mx-auto max-md:px-2"
+  >
     <a href={getRelativeLocaleUrl(lang, "/")}>
-      <img src="/logo.png" alt="SMD" class="w-auto h-[50px]" />
+      <img src="/logo.png" alt="SMD" class="w-auto h-[70px] max-md:h-[50px]" />
     </a>
     <nav>
       <div class="block md:hidden">
@@ -32,10 +27,10 @@ const items = menuItems[lang];
       </div>
       <ul class="hidden md:flex space-x-6">
         {
-          items.map((item) => (
+          menuItems.map((item) => (
             <li>
               <a href={getRelativeLocaleUrl(lang, item.path)} class="">
-                {item.text}
+                {t(item.text)}
               </a>
             </li>
           ))
@@ -45,10 +40,10 @@ const items = menuItems[lang];
     <div class="md:hidden" id="mobileMenu" style="display: none;">
       <ul class="flex flex-col space-y-4">
         {
-          items.map((item) => (
+          menuItems.map((item) => (
             <li>
-              <a href="#" class="">
-                {item.text}
+              <a href="#" class="opacity-100">
+                {t(item.text)}
               </a>
             </li>
           ))
@@ -57,5 +52,26 @@ const items = menuItems[lang];
     </div>
   </div>
 </header>
+<style>
+  .header-animate {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    animation: reduce-header linear both;
+    animation-timeline: scroll();
+    animation-range: 0 150px;
+  }
 
+  @keyframes reduce-header {
+    to {
+      box-shadow:
+        0 5px 50px -5px #ffffff1a,
+        0 0 0 1px #ffffff1a;
+      background: #0000004d;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+  }
+</style>
 <script></script>
