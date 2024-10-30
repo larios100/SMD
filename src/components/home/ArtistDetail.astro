@@ -22,8 +22,14 @@ const slugName = slugArr.join("/");
     </aside>-->
     <main class="max-w-7xl">
       <div class="float-left mr-4 mb-4 w-1/3 h-auto">
-        <img src={`/${img}`} alt={name} class="rounded-lg w-full mask-shadow" />
-        <div class="relative p-4">
+        <picture>
+          <img
+            src={`/${img}`}
+            alt={name}
+            class="rounded-lg w-full mask-shadow"
+          />
+        </picture>
+        <div class="relative p-4 max-md:hidden">
           <div class="flex flex-row max-md:w-3/4 justify-between mt-2 icons">
             <a href={social.instagram} target="_blank">
               <Instagram />
@@ -48,7 +54,7 @@ const slugName = slugArr.join("/");
           {name}
         </h1>
         <div
-          class="flex flex-row max-md:w-3/4 w-1/4 justify-between mt-2 icons"
+          class="flex flex-row max-md:w-1/2 w-1/4 justify-between mt-2 icons"
         >
           <a href={social.instagram} target="_blank">
             <Instagram />

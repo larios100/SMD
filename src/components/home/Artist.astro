@@ -21,7 +21,7 @@ const backgrounds = {
 } as const;
 
 type BackgroundName = keyof typeof backgrounds;
-const bg: BackgroundName = `bg-${slug}` as BackgroundName;
+const bg: BackgroundName = slug as BackgroundName;
 ---
 
 <div style="display: none;">
