@@ -24,6 +24,12 @@ type BackgroundName = keyof typeof backgrounds;
 const bg: BackgroundName = `bg-${slug}` as BackgroundName;
 ---
 
+<div style="display: none;">
+  <div class="bg-maluma">text</div>
+  <div class="bg-xavi">text</div>
+  <div class="bg-drian">text</div>
+  <div class="bg-grupo-arriesgado">text</div>
+</div>
 <div class="md:w-1/5 w-1/2 artist-item" transition:name={`img-${slug}`}>
   <div
     class:list={[
