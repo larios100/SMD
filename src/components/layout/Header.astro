@@ -2,6 +2,7 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import type { MenuItem } from "src/types";
 import { useTranslations } from "@i18n/utils";
+import { ui } from "@i18n/ui";
 
 const { lang } = Astro.props as { lang: "es" | "en" };
 
@@ -22,34 +23,38 @@ const t = useTranslations(lang);
       <img src="/logo.png" alt="SMD" class="w-auto h-[70px] max-md:h-[50px]" />
     </a>
     <nav>
-      <div class="block md:hidden">
-        <button class="text-white" id="menuButton"> &#9776; </button>
+      <div id="divmenuButton" class="block md:hidden">
+        <button class="text-4xl" id="menuButton"> &#9776; </button>
       </div>
       <ul class="hidden md:flex space-x-6">
         {
           menuItems.map((item) => (
             <li>
               <a href={getRelativeLocaleUrl(lang, item.path)} class="">
-                {t(item.text)}
+                {t(item.text as keyof typeof ui.es)}
               </a>
             </li>
           ))
         }
       </ul>
     </nav>
-    <div class="md:hidden" id="mobileMenu" style="display: none;">
+  </div>
+  <div class="md:hidden bg-black/20" id="mobileMenu" style="display: none;">
+    <nav
+      class="col-span-full overflow-x-auto row-[2/3] grid transition-[grid-template-rows] grid-rows-[1fr] md:justify-center md:flex group/nav"
+    >
       <ul class="flex flex-col space-y-4">
         {
           menuItems.map((item) => (
-            <li>
+            <li class="flex justify-center w-full first:mt-5 md:first:mt-0 md:block md:w-auto">
               <a href="#" class="opacity-100">
-                {t(item.text)}
+                {t(item.text as keyof typeof ui.es)}
               </a>
             </li>
           ))
         }
       </ul>
-    </div>
+    </nav>
   </div>
 </header>
 <style>
@@ -61,6 +66,9 @@ const t = useTranslations(lang);
     animation: reduce-header linear both;
     animation-timeline: scroll();
     animation-range: 0 150px;
+  }
+  .nav-mobile {
+    backdrop-filter: blur(10px);
   }
 
   @keyframes reduce-header {
@@ -74,4 +82,24 @@ const t = useTranslations(lang);
     }
   }
 </style>
-<script></script>
+<script is:inline>
+  const button = document.getElementById("menuButton");
+  button.addEventListener("click", function () {
+    const menu = document.getElementById("mobileMenu");
+    if (menu.style.display == "none") menu.style.display = "block";
+    else menu.style.display = "none";
+  });
+  function reportWindowSize() {
+    const button = document.getElementById("divmenuButton");
+    const menu = document.getElementById("mobileMenu");
+    console.log("width", window.innerWidth);
+    if (
+      (" " + button.className + " ").replace(/[\n\t]/g, " ").indexOf("hidden") >
+      -1
+    ) {
+      menu.style.display = "none";
+    }
+  }
+
+  window.onresize = reportWindowSize;
+</script>

@@ -1,47 +1,77 @@
 ---
-import Facebook from "@components/icons/Facebook.astro";
+import AppleMusic from "@components/icons/AppleMusic.astro";
 import Instagram from "@components/icons/Instagram.astro";
-import Threads from "@components/icons/Threads.astro";
+import Spotify from "@components/icons/Spotify.astro";
 import Tiktok from "@components/icons/Tiktok.astro";
 import Youtube from "@components/icons/Youtube.astro";
 
-const { lang, entry } = Astro.props;
+const { entry } = Astro.props;
 const { slug } = entry;
 const { Content } = await entry.render();
-const { name, img } = entry.data;
-const [langt, ...slugArr] = entry.slug.split("/");
+const { name, img, social } = entry.data;
+const [langt, ...slugArr] = slug.split("/");
 const slugName = slugArr.join("/");
-console.log(slugName);
+//transition:name={`img-${slugName}`}
+//transition:name={`title-${slugName}`}
 ---
 
 <section class="max-w-7xl mx-auto max-md:px-3">
   <div class="flex max-md:flex-col gap-12">
-    <aside class="flex flex-col items-center gap-4 text-left max-md:w-full">
-      <img
-        transition:name={`img-${slugName}`}
-        class="rounded w-100 h-auto"
-        src={`/${img}`}
-        alt={name}
-      />
-    </aside>
-    <main class="max-w-3xl">
-      <h1 transition:name={`title-${slugName}`} class="text-4xl font-bold mb-4">
-        {name}
-      </h1>
-      <div>
-        <div
-          class="flex flex-row max-md:w-3/4 w-1/2 justify-between mt-2 icons"
-        >
-          <Instagram />
-          <Threads />
-          <Youtube />
-          <Facebook />
-          <Tiktok />
+    <!-- <aside class="flex flex-col items-center gap-4 text-left max-md:w-full">
+      <img class="rounded w-100 h-auto" src={`/${img}`} alt={name} />
+    </aside>-->
+    <main class="max-w-7xl">
+      <div class="float-left mr-4 mb-4 w-1/3 h-auto">
+        <img src={`/${img}`} alt={name} class="rounded-lg w-full mask-shadow" />
+        <div class="relative p-4">
+          <div class="flex flex-row max-md:w-3/4 justify-between mt-2 icons">
+            <a href={social.instagram} target="_blank">
+              <Instagram />
+            </a>
+            <a href={social.youtube} target="_blank">
+              <Youtube />
+            </a>
+            <a href={social.tiktok} target="_blank">
+              <Tiktok />
+            </a>
+            <a href={social.spotify} target="_blank">
+              <Spotify />
+            </a>
+            <a href={social.apple} target="_blank">
+              <AppleMusic />
+            </a>
+          </div>
         </div>
       </div>
-      <div class="prose prose-invert mt-4 text-2xl text-gray-400">
-        <Content />
+      <div class="w-full">
+        <h1 class="text-4xl font-bold mb-4" transition:name={`img-${slugName}`}>
+          {name}
+        </h1>
+        <div
+          class="flex flex-row max-md:w-3/4 w-1/4 justify-between mt-2 icons"
+        >
+          <a href={social.instagram} target="_blank">
+            <Instagram />
+          </a>
+          <a href={social.youtube} target="_blank">
+            <Youtube />
+          </a>
+          <a href={social.tiktok} target="_blank">
+            <Tiktok />
+          </a>
+          <a href={social.spotify} target="_blank">
+            <Spotify />
+          </a>
+          <a href={social.apple} target="_blank">
+            <AppleMusic />
+          </a>
+        </div>
       </div>
+      <article
+        class="prose prose-invert max-w-none lg:prose-xl mt-4 text-gray-400"
+      >
+        <Content />
+      </article>
     </main>
   </div>
 </section>
@@ -50,16 +80,14 @@ console.log(slugName);
     <div class="md:w-[60%]">
       <h5 class="text-5xl font-thin mb-4">Last Video</h5>
       <iframe
-        src="https://www.youtube.com/embed/em1Ndp93vNQ?controls=1&rel=0&playsinline=0&modestbranding=0&autoplay=0&enablejsapi=1&origin=https%3A%2F%2Fwalterkolm.com&widgetid=1"
-        frameborder="0"
+        src="https://www.youtube.com/embed/HfzbN5ky5Co?controls=1&rel=0&playsinline=0&modestbranding=0&autoplay=0&enablejsapi=1&origin=https%3A%2F%2Fwalterkolm.com&widgetid=1"
         width="100%"
         height="360"></iframe>
     </div>
     <div class="md:w-[40%]">
       <h5 class="text-5xl font-thin mb-4">Enjoy the Playlist</h5>
       <iframe
-        src="https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO0N7ckw?utm_source=generator"
-        frameborder="0"
+        src="https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO2csqsP?utm_source=generator"
         width="100%"
         height="400"></iframe>
     </div>
@@ -69,8 +97,16 @@ console.log(slugName);
   .icons {
     svg {
       fill: #9c9c9c;
-      width: 3em;
-      height: 3em;
+      width: 2em;
+      height: 2em;
     }
+    svg:hover {
+      transition: all 0.8s ease;
+      fill: white;
+    }
+  }
+  .mask-shadow {
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
   }
 </style>

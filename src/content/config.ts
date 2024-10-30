@@ -9,8 +9,8 @@ const artists = defineCollection({
       tiktok: z.string().url(),
       instagram: z.string().url(),
       youtube: z.string().url(),
-      facebook: z.string().url(),
-      threads: z.string().url(),
+      apple: z.string().url(),
+      spotify: z.string().url(),
     }),
   }),
 });

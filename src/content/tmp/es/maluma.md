@@ -6,7 +6,8 @@ social:
   instagram: https://www.instagram.com
   youtube: https://www.youtube.com
   facebook: https://www.facebook.com
-  threads: https://www.threads.com
+  apple: https://www.threads.com
+  spotify: https://www.threads.com
 ---
 
 Maluma es el nombre artístico del galardonado cantante pop, compositor y rapero colombiano Juan Luis Londoño Arias. Con una voz dulce y áspera, y una interpretación callejera pero romántica, el pop urbano de Maluma logró cruzar de una audiencia de reggaetón al público general gracias a contagiosos sencillos iniciales como “Obsesión” y “Miss Independent” (cuyos videos también se volvieron virales). Su debut en 2012, Magia, lo hizo popular en las radios de toda América Latina, mientras que Pretty Boy, Dirty Boy de 2015 rompió barreras en Estados Unidos, alcanzando los primeros lugares en las listas de Latin Pop, Urban y Tropical.

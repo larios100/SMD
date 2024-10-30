@@ -1,12 +1,19 @@
 ---
-import { artistList } from "src/lib/data/data";
-import type { ArtistItem } from "src/types";
 import Artist from "@components/home/Artist.astro";
 import { useTranslations } from "@i18n/utils";
+import { getCollection } from "astro:content";
 
 const { lang } = Astro.props as { lang: "es" | "en" };
-const items = artistList;
-function chunkArray(arr: ArtistItem[], chunkSize: number) {
+const artistEntries = await getCollection("artists");
+const items = artistEntries.filter((entry) => {
+  const [lang, ...slug] = entry.slug.split("/");
+  if (lang === "es") {
+    return true;
+  }
+  return false;
+});
+//const items = artistList;
+function chunkArray(arr: any, chunkSize: number) {
   const result = [];
   for (let i = 0; i < arr.length; i += chunkSize) {
     result.push(arr.slice(i, i + chunkSize));
@@ -19,17 +26,19 @@ const t = useTranslations(lang);
 ---
 
 <section class="text-center my-10" data-eos="fade-up">
-  <h1
-    class="max-md:text-3xl text-5xl my-10 text-blue-400"
-    data-eos="fade-up"
-    data-aos-duration="3000"
-  >
-    {t("home.title")}
-  </h1>
+  <div class="my-10 gradient-text text-center">
+    <h1
+      class="max-md:text-3xl text-5xl"
+      data-eos="fade-up"
+      data-aos-duration="3000"
+    >
+      {t("home.title")}
+    </h1>
+  </div>
   {
     groups5.map((group) => (
       <div class="flex flex-wrap min-h-[300px] w-full max-md:hidden">
-        {group.map((item) => {
+        {group.map((item: any) => {
           return <Artist lang={lang} item={item} />;
         })}
       </div>
@@ -38,7 +47,7 @@ const t = useTranslations(lang);
   {
     groups2.map((group) => (
       <div class="flex flex-wrap min-h-[300px] w-full lg:hidden">
-        {group.map((item) => (
+        {group.map((item: any) => (
           <Artist lang={lang} item={item} />
         ))}
       </div>

@@ -10,11 +10,14 @@ export default {
         carlosvives: "url('/carlosvives.webp')",
         wisin: "url('/wisin.webp')",
         priceroyce: "url('/priceroyce.webp')",
+        xavi: "url('/xavi.webp')",
+        drian: "url('/drian.webp')",
+        "grupo-arriesgado": "url('/grupoarriesgado.webp')",
       },
       flexGrow: {
         4: "4",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };

@@ -6,7 +6,8 @@ social:
   instagram: https://www.instagram.com
   youtube: https://www.youtube.com
   facebook: https://www.facebook.com
-  threads: https://www.threads.com
+  apple: https://www.threads.com
+  spotify: https://www.threads.com
 ---
 
 Maluma is the stage name of award-winning Colombian pop singer, songwriter, and rapper Juan Luis Londoño Arias. Possessed of a sweet, grainy tenor voice and streetwise yet romantic delivery, the pop urbano was able to cross over from a reggaeton audience to the mainstream thanks to infectious early singles such as “Obsesión” and “Miss Independent” (whose videos also went viral). His 2012 debut Magia endeared him to radio listeners across Latin America, while 2015’s Pretty Boy, Dirty Boy broke through in the U.S., landing on the upper rungs of the Latin Pop, Urban, and Tropical charts.

@@ -32,4 +32,15 @@ const { title, lang } = Astro.props;
     <Footer />
   </body>
 </html>
-<style is:global></style>
+<style is:global>
+  .gradient-text {
+    background-image: linear-gradient(
+      to right,
+      #0891b2,
+      #4338ca
+    ); /* Degradado de ejemplo */
+    display: inline-block;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>
