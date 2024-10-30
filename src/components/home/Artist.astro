@@ -10,16 +10,25 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 const { item, lang } = Astro.props;
 const bgArr = item.slug.split("/");
 const slug = bgArr[1];
-const bg = `bg-${slug}`;
+
 const t = useTranslations(lang);
 const { name } = item.data;
+const backgrounds = {
+  maluma: "bg-maluma",
+  xavi: "bg-xavi",
+  drian: "bg-drian",
+  "grupo-arriesgado": "bg-grupo-arriesgado",
+} as const;
+
+type BackgroundName = keyof typeof backgrounds;
+const bg: BackgroundName = `bg-${slug}` as BackgroundName;
 ---
 
 <div class="md:w-1/5 w-1/2 artist-item" transition:name={`img-${slug}`}>
   <div
     class:list={[
       `relative group bg-top bg-no-repeat bg-cover pt-[350px] pb-[50px] transition`,
-      bg,
+      `${backgrounds[bg] || "bg-default"}`,
     ]}
   >
     <div
