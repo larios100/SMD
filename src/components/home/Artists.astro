@@ -75,7 +75,7 @@ const t = useTranslations(lang);
     const container = document.getElementById("slideContainer");
     if (window.innerWidth < 875 && container != null) {
       var wipeAnimation = new TimelineMax()
-        .to("#slideContainer", 1, { x: "300%" })
+        .to("#slideContainer", 1, { x: "0%" })
         .to("#slideContainer", 1, { x: "-80%" })
         .to("#slideContainer", 1, { x: "-140%" });
 
