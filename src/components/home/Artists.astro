@@ -37,9 +37,7 @@ const t = useTranslations(lang);
     <div id="slideContainer" class="flex space-x-4">
       {
         order.map((item, index) => (
-          <div data-aos="fade-in" data-aos-delay={index * 200}>
-            <Artist lang={lang} item={item} />
-          </div>
+          <Artist lang={lang} item={item} index={index} />
         ))
       }
     </div>
