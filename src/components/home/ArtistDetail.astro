@@ -27,6 +27,7 @@ const slugName = slugArr.join("/");
             src={`/${img}`}
             alt={name}
             class="rounded-lg w-full mask-shadow"
+            transition:name={`img-${slugName}`}
           />
         </picture>
         <div data-aos="fade-up" class="relative p-4 max-md:hidden">

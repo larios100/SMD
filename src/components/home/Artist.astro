@@ -26,7 +26,12 @@ const bg: BackgroundName = slug as BackgroundName;
 
 <picture class="img-artist z-10 md:w-1/3 w-3/4 flex-shrink-0 text-left">
   <a href={getRelativeLocaleUrl(lang, `/${slug}`)}>
-    <img class="w-full object-cover" src={`/${img}`} alt={name} />
+    <img
+      class="w-full object-cover"
+      src={`/${img}`}
+      alt={name}
+      transition:name={`img-${slug}`}
+    />
     <h3 class="text-white text-3xl">{name}</h3>
   </a>
 </picture>

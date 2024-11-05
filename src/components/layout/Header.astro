@@ -150,12 +150,16 @@ const t = useTranslations(lang);
     top: 0;
     left: 0;
     right: 0;
-    animation: reduce-header linear both;
-    animation-timeline: scroll();
-    animation-range: 0 100px;
   }
   .nav-mobile {
     backdrop-filter: blur(10px);
+  }
+  .header-animate.scrolled {
+    background: #0000004d;
+    background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+    box-shadow:
+      0 5px 50px -5px #ffffff1a,
+      0 0 0 1px #ffffff1a;
   }
 
   @keyframes reduce-header {
@@ -170,7 +174,10 @@ const t = useTranslations(lang);
 </style>
 <script>
   //-webkit-backdrop-filter: blur(10px);
-
+  //
+  //animation: reduce-header linear both;
+  //  animation-timeline: scroll();
+  //  animation-range: 0 100px;
   //backdrop-filter: blur(10px);
   const button = document.getElementById("menuButton");
   button?.addEventListener("click", function () {
@@ -192,15 +199,13 @@ const t = useTranslations(lang);
   }
 
   window.onresize = reportWindowSize;
-
-  function changeLanguage(event: any) {
-    const selectedLanguage = event.target.value;
-    const [lang, ...slugArr] = window.location.pathname
-      .split("/")
-      .filter((item) => item !== "");
-
-    if (selectedLanguage !== lang) {
-      window.location.href = `/${selectedLanguage}/${slugArr.join("/")}`;
+  window.onscroll = function () {
+    const header = document.querySelector(".header-animate");
+    if (header == null) return;
+    if (window.scrollY > 50) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
     }
-  }
+  };
 </script>
