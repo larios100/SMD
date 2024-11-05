@@ -1,6 +1,7 @@
 ---
 name: Drian
 img: drian.webp
+order: 3
 social:
   tiktok: https://www.tiktok.com/@drianofiicial
   instagram: https://www.instagram.com/drianofficiial/

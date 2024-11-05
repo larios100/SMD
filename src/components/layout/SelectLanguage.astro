@@ -1,0 +1,34 @@
+---
+import { languages } from "@i18n/ui";
+const { lang } = Astro.props as { lang: "es" | "en" };
+---
+
+<select
+  onchange="changeLanguage(event)"
+  class="p-2 bg-transparent"
+  aria-label="Selector de idioma"
+>
+  {
+    Object.entries(languages).map(([Itemlang, label]) => {
+      if (Itemlang == lang)
+        return (
+          <option selected value={Itemlang}>
+            {label}
+          </option>
+        );
+      return <option value={Itemlang}>{label}</option>;
+    })
+  }
+</select>
+<script is:inline>
+  function changeLanguage(event) {
+    const selectedLanguage = event.target.value;
+    const [lang, ...slugArr] = window.location.pathname
+      .split("/")
+      .filter((item) => item !== "");
+
+    if (selectedLanguage !== lang) {
+      window.location.href = `/${selectedLanguage}/${slugArr.join("/")}`;
+    }
+  }
+</script>

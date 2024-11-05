@@ -5,6 +5,7 @@ const artists = defineCollection({
   schema: z.object({
     name: z.string(),
     img: z.string(),
+    order: z.number(),
     social: z.object({
       tiktok: z.string().url(),
       instagram: z.string().url(),

@@ -19,6 +19,7 @@ const { title, lang } = Astro.props;
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta http-equiv="Permissions-Policy" content="encrypted-media=(self)" />
     <title>{title}</title>
     <ViewTransitions />
   </head>
@@ -26,10 +27,20 @@ const { title, lang } = Astro.props;
     <div class="fixed inset-x-0 top-0 -z-30 h-screen bg-black/80"></div>
     <ImageBackground />
     <Header lang={lang} />
-    <div class="mt-36">
+    <div class="mt-28">
       <slot />
     </div>
     <Footer />
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script is:inline src="https://unpkg.com/aos@next/dist/aos.js" onload=""
+    ></script>
+    <script is:inline>
+      document.addEventListener("astro:page-load", function () {
+        const aosObj = AOS.init();
+        //console.log("aosObj", aosObj);
+      });
+    </script>
   </body>
 </html>
 <style is:global>
@@ -42,5 +53,15 @@ const { title, lang } = Astro.props;
     display: inline-block;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+    scroll-behavior: smooth;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    scroll-behavior: smooth;
   }
 </style>

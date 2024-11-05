@@ -1,0 +1,85 @@
+---
+import Facebook from "@components/icons/Facebook.astro";
+import Instagram from "@components/icons/Instagram.astro";
+import Threads from "@components/icons/Threads.astro";
+import Tiktok from "@components/icons/Tiktok.astro";
+import Youtube from "@components/icons/Youtube.astro";
+import { useTranslations } from "@i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const { item, lang } = Astro.props;
+const bgArr = item.slug.split("/");
+const slug = bgArr[1];
+
+const t = useTranslations(lang);
+const { name } = item.data;
+const backgrounds = {
+  maluma: "bg-maluma",
+  xavi: "bg-xavi",
+  drian: "bg-drian",
+  "grupo-arriesgado": "bg-grupo-arriesgado",
+} as const;
+
+type BackgroundName = keyof typeof backgrounds;
+const bg: BackgroundName = slug as BackgroundName;
+---
+
+<div style="display: none;">
+  <div class="bg-maluma">text</div>
+  <div class="bg-xavi">text</div>
+  <div class="bg-drian">text</div>
+  <div class="bg-grupo-arriesgado">text</div>
+</div>
+<div class="md:w-1/5 w-1/2 artist-item" transition:name={`img-${slug}`}>
+  <div
+    class:list={[
+      `relative group bg-top bg-no-repeat bg-cover pt-[350px] pb-[50px] transition`,
+      `${backgrounds[bg] || "bg-default"}`,
+    ]}
+  >
+    <div
+      class="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 hover:bg-opacity-0"
+    >
+    </div>
+    <div class="relative z-10 p-4 text-white">
+      <h2 class="text-2xl" transition:name={`title-${slug}`}>
+        {name}
+      </h2>
+      <div
+        class="flex flex-row max-md:w-3/4 w-1/2 mx-auto justify-between mt-2"
+      >
+        <Instagram />
+        <Threads />
+        <Youtube />
+        <Facebook />
+        <Tiktok />
+      </div>
+      <div class="text-center mt-4">
+        <a
+          href={getRelativeLocaleUrl(lang, slug)}
+          class="border border-white rounded-md w-auto px-3 py-2 group-hover:bg-gray-800 group-hover:border-gray-800"
+        >
+          {t("home.readmore")}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .artist-item:hover {
+    flex: 4;
+    transition: all 0.8s ease;
+    svg {
+      fill: white;
+    }
+  }
+  .artist-item {
+    flex: 2;
+    transition: all 0.8s ease;
+    svg {
+      fill: #9c9c9c;
+      width: 1em;
+      height: 1em;
+    }
+  }
+</style>

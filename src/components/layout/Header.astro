@@ -3,6 +3,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import type { MenuItem } from "src/types";
 import { useTranslations } from "@i18n/utils";
 import { ui } from "@i18n/ui";
+import SelectLanguage from "./SelectLanguage.astro";
 
 const { lang } = Astro.props as { lang: "es" | "en" };
 
@@ -15,6 +16,7 @@ const menuItems: MenuItem[] = [
 const t = useTranslations(lang);
 ---
 
+<!-- 
 <header class="text-indigo-600 header-animate z-50">
   <div
     class="py-4 flex justify-between items-center max-w-7xl mx-auto max-md:px-2"
@@ -57,7 +59,92 @@ const t = useTranslations(lang);
     </nav>
   </div>
 </header>
+-->
+<header class="text-indigo-600 header-animate z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between p-4">
+    <!-- Logo -->
+    <div class="text-2xl font-bold">
+      <a href={getRelativeLocaleUrl(lang, "/")}>
+        <img
+          src="/logo.png"
+          alt="SMD"
+          class="w-auto h-[70px] max-md:h-[50px]"
+        />
+      </a>
+    </div>
+
+    <!-- Menú de navegación (visible en pantallas grandes) -->
+    <nav class="hidden md:flex space-x-4">
+      {
+        menuItems.map((item) => (
+          <a
+            href={getRelativeLocaleUrl(lang, item.path)}
+            class="hover:text-sky-400"
+          >
+            {t(item.text as keyof typeof ui.es)}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Selector de idioma para pantallas grandes -->
+    <div class="hidden md:flex items-center">
+      <SelectLanguage lang={lang} />
+    </div>
+
+    <!-- Diseño móvil: Selector de idioma a la derecha y botón al centro -->
+    <div class="flex md:hidden w-full items-center justify-between">
+      <!-- Botón de menú centrado -->
+      <button
+        id="menuButton"
+        class="focus:outline-none mx-auto"
+        aria-label="Abrir menú"
+        @click="open = !open"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+
+      <!-- Selector de idioma a la derecha -->
+      <SelectLanguage lang={lang} />
+    </div>
+  </div>
+
+  <!-- Menú desplegable en móviles -->
+  <div id="mobileMenu" class={`md:hidden hidden bg-gray-700 p-4`}>
+    <nav class="space-y-2 text-center">
+      {
+        menuItems.map((item) => (
+          <a
+            href={getRelativeLocaleUrl(lang, item.path)}
+            class="hover:text-sky-400 block"
+          >
+            {t(item.text as keyof typeof ui.es)}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
 <style>
+  #mobileMenu {
+    display: none;
+  }
+  #mobileMenu.open {
+    display: block;
+  }
   .header-animate {
     position: fixed;
     top: 0;
@@ -65,7 +152,7 @@ const t = useTranslations(lang);
     right: 0;
     animation: reduce-header linear both;
     animation-timeline: scroll();
-    animation-range: 0 150px;
+    animation-range: 0 100px;
   }
   .nav-mobile {
     backdrop-filter: blur(10px);
@@ -77,29 +164,43 @@ const t = useTranslations(lang);
         0 5px 50px -5px #ffffff1a,
         0 0 0 1px #ffffff1a;
       background: #0000004d;
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
+      background-color: rgb(0 0 0 / var(--tw-bg-opacity));
     }
   }
 </style>
-<script is:inline>
+<script>
+  //-webkit-backdrop-filter: blur(10px);
+
+  //backdrop-filter: blur(10px);
   const button = document.getElementById("menuButton");
-  button.addEventListener("click", function () {
+  button?.addEventListener("click", function () {
     const menu = document.getElementById("mobileMenu");
-    if (menu.style.display == "none") menu.style.display = "block";
-    else menu.style.display = "none";
+    if (menu == null) return;
+    menu.classList.toggle("open");
   });
   function reportWindowSize() {
     const button = document.getElementById("divmenuButton");
     const menu = document.getElementById("mobileMenu");
     console.log("width", window.innerWidth);
     if (
-      (" " + button.className + " ").replace(/[\n\t]/g, " ").indexOf("hidden") >
-      -1
+      (" " + button?.className + " ")
+        .replace(/[\n\t]/g, " ")
+        .indexOf("hidden") > -1
     ) {
-      menu.style.display = "none";
+      //menu?.style?.display = "none";
     }
   }
 
   window.onresize = reportWindowSize;
+
+  function changeLanguage(event: any) {
+    const selectedLanguage = event.target.value;
+    const [lang, ...slugArr] = window.location.pathname
+      .split("/")
+      .filter((item) => item !== "");
+
+    if (selectedLanguage !== lang) {
+      window.location.href = `/${selectedLanguage}/${slugArr.join("/")}`;
+    }
+  }
 </script>

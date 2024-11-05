@@ -4,16 +4,19 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<section class="text-center max-w-7xl mx-auto mt-28" data-eos="fade-up">
-  <div class="gradient-text">
+<section class="text-center max-w-7xl mx-auto mt-28">
+  <div data-aos="fade-up" class="gradient-text">
     <h2 class="text-5xl max-md:text-3xl">{t("home.whatwedo")}</h2>
   </div>
 
-  <p class="text-lg my-7">
+  <p data-aos="fade-up" class="text-lg my-7">
     These are the different departments that we work for our artists
   </p>
   <div class="grid max-md:grid-cols-1 grid-cols-2 gap-4 max-md:px-2">
-    <div class="border border-gray-700 rounded-md min-h-4 py-8 px-4">
+    <div
+      data-aos="fade-up"
+      class="border border-gray-700 rounded-md min-h-4 py-8 px-4"
+    >
       <h5 class="text-base">Editorial Administration</h5>
       <p class="text-gray-500 mt-7">
         Each artist has their individual needs in relation to their music and
@@ -21,7 +24,10 @@ const t = useTranslations(lang);
         financial advice when needed.
       </p>
     </div>
-    <div class="border border-gray-700 rounded-md min-h-4 py-8 px-4">
+    <div
+      data-aos="fade-up"
+      class="border border-gray-700 rounded-md min-h-4 py-8 px-4"
+    >
       <h5 class="text-base">Editorial Administration</h5>
       <p class="text-gray-500 mt-7">
         Each artist has their individual needs in relation to their music and
@@ -29,7 +35,10 @@ const t = useTranslations(lang);
         financial advice when needed.
       </p>
     </div>
-    <div class="border border-gray-700 rounded-md min-h-4 py-8 px-4">
+    <div
+      data-aos="fade-up"
+      class="border border-gray-700 rounded-md min-h-4 py-8 px-4"
+    >
       <h5 class="text-base">Editorial Administration</h5>
       <p class="text-gray-500 mt-7">
         Each artist has their individual needs in relation to their music and
@@ -37,7 +46,10 @@ const t = useTranslations(lang);
         financial advice when needed.
       </p>
     </div>
-    <div class="border border-gray-700 rounded-md min-h-4 py-8 px-4">
+    <div
+      data-aos="fade-up"
+      class="border border-gray-700 rounded-md min-h-4 py-8 px-4"
+    >
       <h5 class="text-base">Editorial Administration</h5>
       <p class="text-gray-500 mt-7">
         Each artist has their individual needs in relation to their music and
