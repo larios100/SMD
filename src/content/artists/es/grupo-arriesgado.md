@@ -1,6 +1,6 @@
 ---
 name: Grupo Arriesgado
-img: josh_groban.webp
+img: grupoarriesgado.webp
 order: 2
 social:
   tiktok: https://www.tiktok.com/@grupoarriesgadooficial

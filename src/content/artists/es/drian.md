@@ -1,6 +1,6 @@
 ---
 name: Drian
-img: tyler_perry.webp
+img: drian.webp
 order: 3
 social:
   tiktok: https://www.tiktok.com/@drianofiicial

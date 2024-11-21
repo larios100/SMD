@@ -68,12 +68,12 @@ const t = useTranslations(lang);
         <img
           src="/logo.png"
           alt="SMD"
-          class="w-auto h-[70px] max-md:h-[50px]"
+          class="w-auto h-[85px] max-md:h-[50px]"
         />
       </a>
     </div>
 
-    <!-- Menú de navegación (visible en pantallas grandes) -->
+    <!-- Menú de navegación (visible en pantallas grandes)
     <nav class="hidden md:flex space-x-4">
       {
         menuItems.map((item) => (
@@ -85,15 +85,15 @@ const t = useTranslations(lang);
           </a>
         ))
       }
-    </nav>
+    </nav> -->
 
-    <!-- Selector de idioma para pantallas grandes -->
+    <!-- Selector de idioma para pantallas grandes 
     <div class="hidden md:flex items-center">
       <SelectLanguage lang={lang} />
-    </div>
+    </div>-->
 
     <!-- Diseño móvil: Selector de idioma a la derecha y botón al centro -->
-    <div class="flex md:hidden w-full items-center justify-between">
+    <div class="">
       <!-- Botón de menú centrado -->
       <button
         id="menuButton"
@@ -103,7 +103,7 @@ const t = useTranslations(lang);
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
+          class="h-8 w-8"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -116,8 +116,8 @@ const t = useTranslations(lang);
         </svg>
       </button>
 
-      <!-- Selector de idioma a la derecha -->
-      <SelectLanguage lang={lang} />
+      <!-- Selector de idioma a la derecha 
+      <SelectLanguage lang={lang} />-->
     </div>
   </div>
 
@@ -135,6 +135,38 @@ const t = useTranslations(lang);
         ))
       }
     </nav>
+  </div>
+  <!-- Menú oculto -->
+  <div
+    id="menu"
+    class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center transform scale-0 transition-transform duration-300 ease-in-out"
+  >
+    <button
+      id="menuClose"
+      class="absolute top-4 right-4 text-white text-2xl font-bold focus:outline-none"
+    >
+      &times;
+    </button>
+    <div class="text-center space-y-4">
+      <h1 class="text-3xl font-bold text-sky-400">Menú</h1>
+      <ul class="space-y-2">
+        {
+          menuItems.map((item) => (
+            <li>
+              <a
+                href={getRelativeLocaleUrl(lang, item.path)}
+                class="hover:text-sky-400 text-xl"
+              >
+                {t(item.text as keyof typeof ui.es)}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <SelectLanguage lang={lang} />
+        </li>
+      </ul>
+    </div>
   </div>
 </header>
 
@@ -181,9 +213,18 @@ const t = useTranslations(lang);
   //backdrop-filter: blur(10px);
   const button = document.getElementById("menuButton");
   button?.addEventListener("click", function () {
-    const menu = document.getElementById("mobileMenu");
+    /*const menu = document.getElementById("mobileMenu");
     if (menu == null) return;
-    menu.classList.toggle("open");
+    menu.classList.toggle("open");*/
+    const menu = document.getElementById("menu");
+    if (menu == null) return;
+    menu.classList.remove("scale-0");
+    menu.classList.add("scale-100");
+  });
+  document.getElementById("menuClose")?.addEventListener("click", () => {
+    const menu = document.getElementById("menu");
+    menu?.classList.remove("scale-100");
+    menu?.classList.add("scale-0");
   });
   function reportWindowSize() {
     const button = document.getElementById("divmenuButton");

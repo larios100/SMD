@@ -1,6 +1,6 @@
 ---
 name: Xavi
-img: tyler_perry.webp
+img: xavi.webp
 order: 1
 social:
   tiktok: https://www.tiktok.com/@xaviiiofficial?lang=es
