@@ -28,13 +28,13 @@ const t = useTranslations(lang);
     playsinline></video>
 </div>
 <section class="text-center mb-10 max-w-7xl mx-auto">
-  <div class="my-10 gradient-text text-center">
+  <div class="mt-2 gradient-text text-center">
     <h1 class="max-md:text-3xl text-5xl" data-aos="fade-in">
       {t("home.title")}
     </h1>
   </div>
-  <div id="pinContainer" class="overflow-x-auto no-scrollbar">
-    <div id="slideContainer" class="flex space-x-4">
+  <div id="pinContainer" class="overflow-x-auto no-scrollbar mt-8">
+    <div id="slideContainer" class="flex">
       {
         order.map((item, index) => (
           <Artist lang={lang} item={item} index={index} />

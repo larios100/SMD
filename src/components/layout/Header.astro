@@ -204,42 +204,21 @@ const t = useTranslations(lang);
     }
   }
 </style>
-<script>
-  //-webkit-backdrop-filter: blur(10px);
-  //
-  //animation: reduce-header linear both;
-  //  animation-timeline: scroll();
-  //  animation-range: 0 100px;
-  //backdrop-filter: blur(10px);
-  const button = document.getElementById("menuButton");
-  button?.addEventListener("click", function () {
-    /*const menu = document.getElementById("mobileMenu");
-    if (menu == null) return;
-    menu.classList.toggle("open");*/
-    const menu = document.getElementById("menu");
-    if (menu == null) return;
-    menu.classList.remove("scale-0");
-    menu.classList.add("scale-100");
+<script is:inline>
+  document.addEventListener("astro:page-load", function () {
+    const button = document.getElementById("menuButton");
+    button?.addEventListener("click", function () {
+      const menu = document.getElementById("menu");
+      if (menu == null) return;
+      menu.classList.remove("scale-0");
+      menu.classList.add("scale-100");
+    });
+    document.getElementById("menuClose")?.addEventListener("click", () => {
+      const menu = document.getElementById("menu");
+      menu?.classList.remove("scale-100");
+      menu?.classList.add("scale-0");
+    });
   });
-  document.getElementById("menuClose")?.addEventListener("click", () => {
-    const menu = document.getElementById("menu");
-    menu?.classList.remove("scale-100");
-    menu?.classList.add("scale-0");
-  });
-  function reportWindowSize() {
-    const button = document.getElementById("divmenuButton");
-    const menu = document.getElementById("mobileMenu");
-    console.log("width", window.innerWidth);
-    if (
-      (" " + button?.className + " ")
-        .replace(/[\n\t]/g, " ")
-        .indexOf("hidden") > -1
-    ) {
-      //menu?.style?.display = "none";
-    }
-  }
-
-  window.onresize = reportWindowSize;
   window.onscroll = function () {
     const header = document.querySelector(".header-animate");
     if (header == null) return;
